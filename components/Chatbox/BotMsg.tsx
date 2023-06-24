@@ -1,4 +1,5 @@
 import { Flex, Avatar, Text } from "@chakra-ui/react";
+import { TypeAnimation } from "react-type-animation";
 import TypingDots from "./TypingDots";
 
 interface BotMsgParams {
@@ -26,7 +27,7 @@ export default function BotMsg({ text, loading }: BotMsgParams) {
           <TypingDots />
         ) : (
           <Text whiteSpace={"pre-line"} fontWeight={400}>
-            {text}
+            <TypeAnimation sequence={[text]} speed={75} cursor={false} />
           </Text>
         )}
       </Flex>

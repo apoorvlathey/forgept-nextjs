@@ -21,6 +21,7 @@ specifiers:
   pdf-parse: ^1.1.1
   react: 18.2.0
   react-dom: 18.2.0
+  react-type-animation: ^3.1.0
   typescript: 5.0.4
 
 dependencies:
@@ -44,6 +45,7 @@ dependencies:
   pdf-parse: 1.1.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-type-animation: 3.1.0_biqbaboplfbrettd7655fr4n2y
   typescript: 5.0.4
 
 packages:
@@ -3875,6 +3877,17 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.5.3
+    dev: false
+
+  /react-type-animation/3.1.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-Ju74SpUFpSINqlGU8UeFAF+AnAn0nZcc8MB0Ho6QvRkh8uDKkOzAiMD3l9xEmkbKXnSYsljfVgIDM/zwqEImpQ==}
+    peerDependencies:
+      prop-types: ^15.5.4
+      react: '>= 15.0.0'
+      react-dom: '>= 15.0.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react/18.2.0:
