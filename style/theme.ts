@@ -6,6 +6,8 @@ const colors = {
     greenDark: "#16b201",
     greenDarker: "#129801",
     yellow: "#EDF676",
+    pale: "#f0f0f0",
+    black: "#121212",
   },
 };
 
@@ -25,7 +27,7 @@ const theme = extendTheme({
         scrollBehavior: "smooth",
       },
       body: {
-        bg: "black",
+        bg: "brand.black",
         color: "white",
         fontFamily: "Poppins",
       },

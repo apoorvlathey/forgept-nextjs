@@ -1,5 +1,10 @@
 "use client";
+
 import { useState } from "react";
+import { Box, Spacer } from "@chakra-ui/react";
+import Navbar from "@/components/Navbar";
+import Chatbox from "@/components/Chatbox";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -34,23 +39,11 @@ export default function Home() {
     }
   }
   return (
-    <main className="flex flex-col items-center justify-between p-24">
-      <input
-        className="text-black px-2 py-1"
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button
-        className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2"
-        onClick={sendQuery}
-      >
-        Ask AI
-      </button>
-      {loading && <p>Asking AI ...</p>}
-      {result && <p>{result}</p>}
-      {/* consider removing this button from the UI once the embeddings are created ... */}
-      <button onClick={createIndexAndEmbeddings}>
-        Create index and embeddings
-      </button>
-    </main>
+    <Box>
+      <Navbar />
+      <Chatbox />
+      <Spacer />
+      <Footer />
+    </Box>
   );
 }
