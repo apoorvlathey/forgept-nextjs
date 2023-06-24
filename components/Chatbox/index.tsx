@@ -6,9 +6,15 @@ import {
   HStack,
   Input,
   Spacer,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { OpenAI } from "langchain/llms/openai";
+import { loadQAStuffChain } from "langchain/chains";
+import { Document } from "langchain/document";
 import BotMsg from "./BotMsg";
 import UserMsg from "./UserMsg";
+import OpenAIKeyInput from "@/components/OpenAIKeyInput";
 
 interface Message {
   from: "bot" | "user";
@@ -29,19 +35,47 @@ export default function Chatbox() {
   ]);
   const [result, setResult] = useState<string>();
   const [loading, setLoading] = useState(false);
+  const [openAIApiKey, setOpenAIApiKey] = useState("");
+
+  const { onOpen, onClose, isOpen } = useDisclosure();
 
   const sendQuery = async (query: string) => {
+    if (openAIApiKey.length === 0) {
+      setResult("Please set your OpenAI API Key in the settings menu ↗️");
+      onOpen();
+      return;
+    }
+
     setLoading(true);
     try {
+      // Create query embedding
+      const queryEmbedding = await new OpenAIEmbeddings({
+        openAIApiKey,
+      }).embedQuery(query);
+
       const result = await fetch("/api/read", {
         method: "POST",
-        body: JSON.stringify(query),
+        body: JSON.stringify({
+          question: query,
+          queryEmbedding,
+        }),
       });
       const json = await result.json();
-      setResult(json.data);
+
+      // 8. Create an OpenAI instance and load the QAStuffChain
+      const llm = new OpenAI({ openAIApiKey });
+      const chain = loadQAStuffChain(llm);
+      // 9. Execute the chain with input documents and question
+      const res = await chain.call({
+        input_documents: [new Document({ pageContent: json.data })],
+        question: query,
+      });
+
+      setResult(res.text);
       setLoading(false);
     } catch (err) {
       console.log("err:", err);
+      setResult("☠️ There was some error, please check console");
       setLoading(false);
     }
   };
@@ -88,10 +122,18 @@ export default function Chatbox() {
 
   return (
     <Container mt="8" minW="40vw">
+      <OpenAIKeyInput
+        openAIApiKey={openAIApiKey}
+        setOpenAIApiKey={setOpenAIApiKey}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+      />
       <Flex
         flexDir={"column"}
-        h="70vh"
+        mt="0.5rem"
         p="4"
+        h="70vh"
         bg="brand.pale"
         color="brand.black"
         rounded={"lg"}
