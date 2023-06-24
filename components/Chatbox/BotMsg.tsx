@@ -1,10 +1,12 @@
 import { Flex, Avatar, Text } from "@chakra-ui/react";
+import TypingDots from "./TypingDots";
 
 interface BotMsgParams {
   text: string;
+  loading?: boolean;
 }
 
-export default function BotMsg({ text }: BotMsgParams) {
+export default function BotMsg({ text, loading }: BotMsgParams) {
   return (
     <Flex w="100%" alignItems={"flex-end"}>
       <Avatar name="ForGePT" src="/bot-avatar.png" bg="yellow.300" />
@@ -20,9 +22,13 @@ export default function BotMsg({ text }: BotMsgParams) {
         rounded={"lg"}
         roundedBottomLeft={"0"}
       >
-        <Text whiteSpace={"pre-line"} fontWeight={400}>
-          {text}
-        </Text>
+        {loading ? (
+          <TypingDots />
+        ) : (
+          <Text whiteSpace={"pre-line"} fontWeight={400}>
+            {text}
+          </Text>
+        )}
       </Flex>
     </Flex>
   );

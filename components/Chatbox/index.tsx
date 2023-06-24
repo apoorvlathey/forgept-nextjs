@@ -1,13 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  Avatar,
   Button,
   Container,
   Flex,
   HStack,
   Input,
   Spacer,
-  Text,
 } from "@chakra-ui/react";
 import BotMsg from "./BotMsg";
 import UserMsg from "./UserMsg";
@@ -29,14 +27,10 @@ export default function Chatbox() {
     I'll seek the answer within my knowledge base. 😄`,
     },
   ]);
-
-  const [query, setQuery] = useState("");
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState<string>();
   const [loading, setLoading] = useState(false);
 
-  async function sendQuery() {
-    if (!query) return;
-    setResult("");
+  const sendQuery = async (query: string) => {
     setLoading(true);
     try {
       const result = await fetch("/api/read", {
@@ -50,7 +44,7 @@ export default function Chatbox() {
       console.log("err:", err);
       setLoading(false);
     }
-  }
+  };
 
   const handleSendMessage = () => {
     if (!inputMsg.trim().length) {
@@ -64,6 +58,7 @@ export default function Chatbox() {
         text: inputMsg,
       },
     ]);
+    sendQuery(inputMsg);
 
     setInputMsg("");
   };
@@ -78,6 +73,18 @@ export default function Chatbox() {
       });
     }
   }, [messages, scrollBoxRef]);
+
+  useEffect(() => {
+    if (result) {
+      setMessages((old) => [
+        ...old,
+        {
+          from: "bot",
+          text: result,
+        },
+      ]);
+    }
+  }, [result]);
 
   return (
     <Container mt="8" minW="40vw">
@@ -104,6 +111,7 @@ export default function Chatbox() {
               return <UserMsg key={i} text={msg.text} />;
             }
           })}
+          {loading && <BotMsg text="" loading />}
         </Flex>
         <Spacer />
         <HStack mb="2">
@@ -120,6 +128,7 @@ export default function Chatbox() {
               }
             }}
             onChange={(e) => setInputMsg(e.target.value)}
+            isDisabled={loading}
           />
           <Button colorScheme={"blue"} onClick={() => handleSendMessage()}>
             Send

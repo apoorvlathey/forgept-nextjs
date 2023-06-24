@@ -2,7 +2,7 @@
 import { Button, Center } from "@chakra-ui/react";
 
 export default function Setup() {
-  async function createIndexAndEmbeddings() {
+  const createIndexAndEmbeddings = async () => {
     try {
       const result = await fetch("/api/setup", {
         method: "POST",
@@ -12,7 +12,7 @@ export default function Setup() {
     } catch (err) {
       console.log("err:", err);
     }
-  }
+  };
 
   return (
     <Center mt="5rem">
