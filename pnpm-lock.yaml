@@ -13,6 +13,8 @@ specifiers:
   '@types/node': 20.2.5
   '@types/react': 18.2.7
   '@types/react-dom': 18.2.4
+  csstype: ^3.1.2
+  encoding: ^0.1.13
   eslint: 8.41.0
   eslint-config-next: 13.4.4
   framer-motion: ^10.12.17
@@ -33,14 +35,16 @@ dependencies:
   '@fortawesome/fontawesome-svg-core': 6.4.0
   '@fortawesome/free-brands-svg-icons': 6.4.0
   '@fortawesome/react-fontawesome': 0.2.0_tumfstpptabomqiydababgzl3q
-  '@pinecone-database/pinecone': 0.1.6
+  '@pinecone-database/pinecone': 0.1.6_encoding@0.1.13
   '@types/node': 20.2.5
   '@types/react': 18.2.7
   '@types/react-dom': 18.2.4
+  csstype: 3.1.2
+  encoding: 0.1.13
   eslint: 8.41.0
   eslint-config-next: 13.4.4_opaykosi7ysrbskpnffskmbrki
   framer-motion: 10.12.17_biqbaboplfbrettd7655fr4n2y
-  langchain: 0.0.84_wcaaf4cp3zl5hk2i2gyn76pf7y
+  langchain: 0.0.84_tj2myuo2v4xkmphado3bwkleey
   next: 13.4.4_biqbaboplfbrettd7655fr4n2y
   pdf-parse: 1.1.1
   react: 18.2.0
@@ -50,11 +54,11 @@ dependencies:
 
 packages:
 
-  /@anthropic-ai/sdk/0.4.4:
+  /@anthropic-ai/sdk/0.4.4_encoding@0.1.13:
     resolution: {integrity: sha512-Z/39nQi1sSUCeLII3lsAbL1u+0JF6cR2XmUEX9sLH0VtxmIjY6cjOUYjCkYh4oapTxOkhAFnVSAFJ6cxml2qXg==}
     dependencies:
       '@fortaine/fetch-event-source': 3.0.6
-      cross-fetch: 3.1.6
+      cross-fetch: 3.1.6_encoding@0.1.13
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -1566,11 +1570,11 @@ packages:
       fastq: 1.15.0
     dev: false
 
-  /@pinecone-database/pinecone/0.1.6:
+  /@pinecone-database/pinecone/0.1.6_encoding@0.1.13:
     resolution: {integrity: sha512-tCnVc28udecthhgSBTdcMhYEW+xsR++AdZasp+ZE/AvUD1hOR2IR3edjk9m0sDxZyvXbno2KeqUbLIOZr7sCTw==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      cross-fetch: 3.1.6
+      cross-fetch: 3.1.6_encoding@0.1.13
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -2032,10 +2036,10 @@ packages:
       yaml: 1.10.2
     dev: false
 
-  /cross-fetch/3.1.6:
+  /cross-fetch/3.1.6_encoding@0.1.13:
     resolution: {integrity: sha512-riRvo06crlE8HiqOwIpQhxwdOk4fOeR7FVM/wXoxchFEqMNUjvbs3bfo4OTgMEMHzppd4DxFBDbyySj8Cv781g==}
     dependencies:
-      node-fetch: 2.6.11
+      node-fetch: 2.6.11_encoding@0.1.13
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -2158,6 +2162,12 @@ packages:
 
   /emoji-regex/9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
+    dev: false
+
+  /encoding/0.1.13:
+    resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
+    dependencies:
+      iconv-lite: 0.6.3
     dev: false
 
   /enhanced-resolve/5.15.0:
@@ -2890,6 +2900,13 @@ packages:
     engines: {node: '>=14.18.0'}
     dev: false
 
+  /iconv-lite/0.6.3:
+    resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      safer-buffer: 2.1.2
+    dev: false
+
   /ignore/5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
@@ -3151,7 +3168,7 @@ packages:
       object.assign: 4.1.4
     dev: false
 
-  /langchain/0.0.84_wcaaf4cp3zl5hk2i2gyn76pf7y:
+  /langchain/0.0.84_tj2myuo2v4xkmphado3bwkleey:
     resolution: {integrity: sha512-7b7CIwHE1vB973wRRC0GmU9Jj2bt/xN5SA17VeoHa6zuNunawC2wFUfjQzNtSw+RHtMX0VHUjoBOqQCKGktbXQ==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -3280,8 +3297,8 @@ packages:
       weaviate-ts-client:
         optional: true
     dependencies:
-      '@anthropic-ai/sdk': 0.4.4
-      '@pinecone-database/pinecone': 0.1.6
+      '@anthropic-ai/sdk': 0.4.4_encoding@0.1.13
+      '@pinecone-database/pinecone': 0.1.6_encoding@0.1.13
       ansi-styles: 5.2.0
       binary-extensions: 2.2.0
       expr-eval: 2.0.2
@@ -3498,7 +3515,7 @@ packages:
     resolution: {integrity: sha512-DRI60hzo2oKN1ma0ckc6nQWlHU69RH6xN0sjQTjMpChPfTYvKZdcQFfdYK2RWbJcKyUizSIy/l8OTGxMAM1QDw==}
     dev: false
 
-  /node-fetch/2.6.11:
+  /node-fetch/2.6.11_encoding@0.1.13:
     resolution: {integrity: sha512-4I6pdBY1EthSqDmJkiNk3JIT8cswwR9nfeW/cPdUagJYEQG7R95WRH74wpz7ma8Gh/9dI9FP+OU+0E4FvtA55w==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
@@ -3507,6 +3524,7 @@ packages:
       encoding:
         optional: true
     dependencies:
+      encoding: 0.1.13
       whatwg-url: 5.0.0
     dev: false
 
@@ -3973,6 +3991,10 @@ packages:
       call-bind: 1.0.2
       get-intrinsic: 1.2.1
       is-regex: 1.1.4
+    dev: false
+
+  /safer-buffer/2.1.2:
+    resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: false
 
   /scheduler/0.23.0:
