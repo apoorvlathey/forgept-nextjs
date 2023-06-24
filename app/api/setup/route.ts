@@ -6,8 +6,13 @@ import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { createPineconeIndex, updatePinecone } from "../../../utils";
 import { indexName } from "../../../config";
 
-// TODO: only allow this to be called in development
 export async function POST() {
+  if (process.env.ENABLE_SETUP !== "true") {
+    return NextResponse.json({
+      data: "Can't setup in PROD",
+    });
+  }
+
   const loader = new DirectoryLoader("./documents", {
     ".txt": (path) => new TextLoader(path),
     ".md": (path) => new TextLoader(path),

@@ -18,6 +18,8 @@ interface Message {
 }
 
 export default function Chatbox() {
+  const scrollBoxRef = useRef<HTMLDivElement>(null);
+
   const [inputMsg, setInputMsg] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -28,7 +30,27 @@ export default function Chatbox() {
     },
   ]);
 
-  const scrollBoxRef = useRef<HTMLDivElement>(null);
+  const [query, setQuery] = useState("");
+  const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function sendQuery() {
+    if (!query) return;
+    setResult("");
+    setLoading(true);
+    try {
+      const result = await fetch("/api/read", {
+        method: "POST",
+        body: JSON.stringify(query),
+      });
+      const json = await result.json();
+      setResult(json.data);
+      setLoading(false);
+    } catch (err) {
+      console.log("err:", err);
+      setLoading(false);
+    }
+  }
 
   const handleSendMessage = () => {
     if (!inputMsg.trim().length) {
